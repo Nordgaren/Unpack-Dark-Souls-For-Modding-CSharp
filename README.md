@@ -11,7 +11,7 @@ It will unpack the Dark Souls PTDE folder selected by the user and copy over the
 
 I made this so that it could be used in my [PTDE Mod Installer](https://github.com/Nordgaren/PTDE-Mod-Installer)
 
-If you're patching a non-steam EXE, please send me your original exe so I can add the checksum to my PTDE Mod Installer.
+If you're using this to patch a non-steam EXE, please get in contact with me so I can add the checksum.  
 
 ### Thank You
 
