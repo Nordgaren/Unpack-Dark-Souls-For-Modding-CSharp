@@ -48,6 +48,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 
             if (!archivesExist)
             {
+                patched = CheckEXE(exePath);
                 if (patched)
                     return Logger.Log("EXE already patched!", LogFile);
 

@@ -30,7 +30,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             if (error != null)
             {
                 Console.WriteLine(error);
-
+                Console.ReadLine();
                 return;
             }
 
