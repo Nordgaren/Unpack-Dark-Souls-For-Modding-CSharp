@@ -21,7 +21,7 @@ If you're using this to patch a non-steam EXE, please get in contact with me so 
 
 ### Patch Notes  
 ## V 1.1  
-* Fixed patching only the exe 
+* Fixed patching only the exe and added logger
 ## V 1  
 * Initial release
 * Functionally identical to UDSFM + can patch non-steam EXEs
