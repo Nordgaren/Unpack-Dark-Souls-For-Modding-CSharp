@@ -21,12 +21,12 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             GameInfo gameInfo = GameInfo.GetGameInfo();
             
 
-            if (!File.Exists(gameDir + "\\unpackDS-backup\\" + exeName))
+            if (!File.Exists($@"{gameDir}\unpackDS-backup\{exeName}"))
             {
                 try
                 {
-                    Directory.CreateDirectory(gameDir + "\\unpackDS-backup");
-                    File.Copy(exePath, gameDir + "\\unpackDS-backup\\" + exeName);
+                    Directory.CreateDirectory($@"{gameDir}\unpackDS-backup");
+                    File.Copy(exePath, $@"{gameDir}\unpackDS-backup\{exeName}");
                 }
                 catch (Exception ex)
                 {

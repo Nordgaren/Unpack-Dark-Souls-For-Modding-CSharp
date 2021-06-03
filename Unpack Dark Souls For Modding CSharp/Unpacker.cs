@@ -75,7 +75,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                     return Logger.Log(error, LogFile);
             }
 
-            progress.Report((0, Logger.Log(@"Grabbing missing", LogFile)));
+            progress.Report((0, Logger.Log(@"Grabbing missing BHDs", LogFile)));
             GetBHD(gameDir, progress);
 
             progress.Report((0, Logger.Log("Creating c4110 file", LogFile)));
@@ -303,7 +303,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             foreach (var path in bdt)
             {
                 position++;
-                var target = Path.GetDirectoryName(path) + @"\" + Path.GetFileNameWithoutExtension(path) + ".chrbnd";
+                var target = $@"{Path.GetDirectoryName(path)}\{Path.GetFileNameWithoutExtension(path)}.chrbnd";
                 var percent = (double)position/bdt.Length;
                 progress.Report((percent ,$"Unpacking BND3 ({position}/{bdt.Length}): {target.Replace(gameDir, "")}..."));
                 UnpackBND(target);
@@ -397,12 +397,12 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 
             GameInfo gameInfo = GameInfo.GetGameInfo();
 
-            if (File.Exists(gameDir + "\\unpackDS-backup\\" + exeName))
+            if (File.Exists($@"{gameDir}\unpackDS-backup\{exeName}"))
             {
                 progress.Report((0, Logger.Log("Restoring executable...", LogFile)));
                 try
                 {
-                    File.Copy(gameDir + "\\unpackDS-backup\\" + exeName, exePath, true);
+                    File.Copy($@"{gameDir}\unpackDS-backup\{exeName}", exePath, true);
                 }
                 catch (Exception ex)
                 {
@@ -416,8 +416,8 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             {
                 string restore = gameInfo.BackupDirs[i];
 
-                string restoreSource = gameDir + "\\unpackDS-backup\\" + restore;
-                string restoreTarget = gameDir + "\\" + restore;
+                string restoreSource = $@"{gameDir}\unpackDS-backup\{restore}";
+                string restoreTarget = $@"{gameDir}\{restore}";
 
                 if (File.Exists(restoreSource) && !File.Exists(restoreTarget))
                 {
@@ -440,11 +440,11 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                     string dir = gameInfo.DeleteDirs[i];
 
 
-                    if (Directory.Exists(gameDir + "\\" + dir))
+                    if (Directory.Exists($@"{gameDir}\{dir}"))
                     {
                         progress.Report(((i + 1.0 + gameInfo.BackupDirs.Count) / totalSteps, Logger.Log($"Deleting directory \"{dir}\" ({i + 1}/{gameInfo.DeleteDirs.Count})...", LogFile)));
 
-                        Directory.Delete(gameDir + "\\" + dir, true);
+                        Directory.Delete($@"{gameDir}\{dir}", true);
                     }
                 }
             }

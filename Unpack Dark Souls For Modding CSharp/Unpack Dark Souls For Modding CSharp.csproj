@@ -189,7 +189,6 @@
     <Compile Include="Formats\YBinder.cs" />
     <Compile Include="Formats\YBND3.cs" />
     <Compile Include="Formats\YBXF3.cs" />
-    <Compile Include="FriendlyException.cs" />
     <Compile Include="GameInfo.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />

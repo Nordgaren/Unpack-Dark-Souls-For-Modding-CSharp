@@ -58,6 +58,5 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                 File.WriteAllBytes(outPath, bytes);
             }
         }
-
     }
 }
