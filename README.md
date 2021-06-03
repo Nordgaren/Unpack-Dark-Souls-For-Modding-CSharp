@@ -16,3 +16,7 @@ I made this so that it could be used in my [PTDE Mod Installer](https://github.c
 **[HotPocketRemix](https://github.com/HotPocketRemix)** for making the original UDSFM and helping me understand how to patch the EXE properly.  
 **[TKGP](https://github.com/JKAnderson)** for making SoulsFormats, UXM, and Yabber.  
 **[thefifthmatt](https://github.com/thefifthmatt)** for suggesting how to make the unapacker faster.  
+
+### Patch Notes  
+## V 1
+* Initial release
