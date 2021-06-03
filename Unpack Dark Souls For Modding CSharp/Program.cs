@@ -10,18 +10,8 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 
         static void Main(string[] args)
         {
-
-            var ini = @"C:\Users\Tor\Desktop\DARK SOULS PREPARE TO DIE EDITION\DATA\DSfix.ini";
-
-            var initext = File.ReadAllText(ini);
-
-            bool contains = initext.Contains("Remastest.ini");
-
-#if DEBUG
-            string currentDir = @"C:\Users\Tor\Desktop\DARK SOULS PREPARE TO DIE EDITION TEST\DATA";
-#else
             string currentDir = Directory.GetCurrentDirectory();
-#endif
+
             progress = new Progress<(double value, string status)>(ProgressReport);
 
             //Integrated .dcx unpacking
