@@ -20,6 +20,8 @@ If you're using this to patch a non-steam EXE, please get in contact with me so 
 **[thefifthmatt](https://github.com/thefifthmatt)** for suggesting how to make the unapacker faster.  
 
 ### Patch Notes  
-## V 1
+## V 1.1  
+* Fixed patching only the exe 
+## V 1  
 * Initial release
 * Functionally identical to UDSFM + can patch non-steam EXEs
