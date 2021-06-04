@@ -24,17 +24,24 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                 Console.ReadLine();
                 return;
             }
-
-            string error = Unpacker.Unpack(installPath, progress);
-
-            if (error != null)
+            try
             {
-                Console.WriteLine(error);
-                Console.ReadLine();
-                return;
-            }
+                string error = Unpacker.Unpack(installPath, progress);
 
-            Console.WriteLine("Completed!");
+                if (error != null)
+                {
+                    Console.WriteLine(error);
+                    Console.ReadLine();
+                    return;
+                }
+
+                Console.WriteLine("Completed!");
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                Console.WriteLine($"{ e.Message}\r\n\r\nThe folder you are trying to unpack requires additional priviledges. \r\n\r\nRun the installer as Admin");
+            }
+            
 
             Console.ReadLine();
         }

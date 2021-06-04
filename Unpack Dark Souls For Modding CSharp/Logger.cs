@@ -13,10 +13,12 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 
         public static string Log(string message, string logFile)
         {
+
             LogList.Add(message);
             File.AppendAllLines(logFile, LogList);
             LogList.Clear();
             return message;
+            
         }
 
     }

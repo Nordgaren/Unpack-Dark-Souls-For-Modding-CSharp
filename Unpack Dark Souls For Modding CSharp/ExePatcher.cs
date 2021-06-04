@@ -46,8 +46,6 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 
             try
             {
-
-
                 for (int i = 0; i < gameInfo.Replacements.Count; i++)
                 {
 
