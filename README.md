@@ -7,7 +7,7 @@ It will unpack the Dark Souls PTDE folder selected by the user and copy over the
 
 ### Instructions
 1) Put EXE in Dark Souls PTDE folder
-2) Watch text scrull until it says completed
+2) Watch text scroll until it says completed
 
 I made this so that it could be used in my [PTDE Mod Installer](https://github.com/Nordgaren/PTDE-Mod-Installer)
 
