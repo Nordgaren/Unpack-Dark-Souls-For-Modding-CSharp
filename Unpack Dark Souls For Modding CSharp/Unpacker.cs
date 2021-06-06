@@ -1,6 +1,7 @@
 ﻿using SoulsFormats;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -32,6 +33,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 
             bool unpacked = CheckDIR(gameDir, gameInfo);
             bool patched = CheckEXE(exePath);
+
 
             if (unpacked && patched)
             {
@@ -68,6 +70,17 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                 }
             }
 
+            patched = CheckEXE(exePath);
+
+            if (!patched)
+            {
+                var error = ExePatcher.Patch(exePath, progress);
+                if (error != null)
+                {
+                    return Logger.Log(error, LogFile);
+                }
+            }
+
             try
             {
                 progress.Report((0, Logger.Log("Attempting to backup...", LogFile)));
@@ -99,15 +112,11 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             progress.Report((0, Logger.Log(@"Extracting bhd/bdt pairs", LogFile)));
             ExtractBHD(gameDir, progress);
 
-            //await UnDCX(gameDir);
-            progress.Report((1, Logger.Log("Unpacking complete!", LogFile)));
-
-            patched = CheckEXE(exePath);
-            if (!patched)
-                ExePatcher.Patch(exePath, progress);
 
             progress.Report((1, Logger.Log("Cleaning Archives", LogFile)));
             CleanupArchives(exePath);
+
+            progress.Report((1, Logger.Log("Unpacking complete!", LogFile)));
 
             return null;
         }
@@ -157,14 +166,47 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 
         private static bool CheckDIR(string gameDir, GameInfo gameInfo)
         {
-            bool unpacked = true;
+            bool unpacked = false;
+            long actualSize = 0;
+            long expectedSize = 5722489815;
+
+            foreach (var directory in gameInfo.DeleteDirs)
+            {
+                if (Directory.Exists($@"{gameDir}\{directory}"))
+                    actualSize += DirSize(new DirectoryInfo($@"{gameDir}\{directory}"));
+
+            }
+            bool dirExists = true;
             foreach (var directory in gameInfo.DeleteDirs)
             {
                 if (!Directory.Exists($@"{gameDir}\{directory}"))
-                    unpacked = false;
+                    dirExists = false;
+            }
+
+            if (actualSize >= expectedSize && dirExists)
+            {
+                unpacked = true;
             }
 
             return unpacked;
+        }
+
+        public static long DirSize(DirectoryInfo d)
+        {
+            long size = 0;
+            // Add file sizes.
+            FileInfo[] fis = d.GetFiles();
+            foreach (FileInfo fi in fis)
+            {
+                size += fi.Length;
+            }
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+            foreach (DirectoryInfo di in dis)
+            {
+                size += DirSize(di);
+            }
+            return size;
         }
 
         private static bool CheckArchives(string gameDir, GameInfo gameInfo)
