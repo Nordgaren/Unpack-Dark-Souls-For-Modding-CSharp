@@ -25,6 +25,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             {
                 try
                 {
+                    progress.Report((0, Logger.Log($"Backing Up {exeName}...", LogFile)));
                     Directory.CreateDirectory($@"{gameDir}\unpackDS-backup");
                     File.Copy(exePath, $@"{gameDir}\unpackDS-backup\{exeName}");
                 }

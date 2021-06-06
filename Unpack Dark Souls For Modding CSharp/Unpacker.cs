@@ -34,7 +34,20 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             bool patched = CheckEXE(exePath);
 
             if (unpacked && patched)
+            {
                 return Logger.Log("Dark Souls is already unpacked!", LogFile);
+            }
+
+            if (unpacked && !patched)
+            {
+                var error = ExePatcher.Patch(exePath, progress);
+
+                if (error != null)
+                {
+                    return Logger.Log(error, LogFile);
+                }
+                return Logger.Log("EXE successfully patched", LogFile);
+            }
 
             progress.Report((0, "Preparing to unpack..."));
             if (driveInfo.AvailableFreeSpace < gameInfo.RequiredGB * 1024 * 1024 * 1024)
@@ -42,18 +55,17 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                 return Logger.Log($"You are out of Disk space. You need at least {gameInfo.RequiredGB}GB. Please free up some space and try to unpack, again.", LogFile);
             }
 
-            Restore(exePath, progress);
-
             var archivesExist = CheckArchives(gameDir, gameInfo);
 
             if (!archivesExist)
             {
-                patched = CheckEXE(exePath);
-                if (patched)
-                    return Logger.Log("EXE already patched!", LogFile);
+                Restore(exePath, progress);
+                archivesExist = CheckArchives(gameDir, gameInfo);
 
-                ExePatcher.Patch(exePath, progress);
-                return Logger.Log("EXE successfully patched", LogFile);
+                if (!archivesExist)
+                {
+                    return Logger.Log($"No archives detected to unpack", LogFile);
+                }
             }
 
             try
@@ -90,7 +102,8 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             //await UnDCX(gameDir);
             progress.Report((1, Logger.Log("Unpacking complete!", LogFile)));
 
-            if(!patched)
+            patched = CheckEXE(exePath);
+            if (!patched)
                 ExePatcher.Patch(exePath, progress);
 
             progress.Report((1, Logger.Log("Cleaning Archives", LogFile)));
@@ -399,7 +412,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 
             if (File.Exists($@"{gameDir}\unpackDS-backup\{exeName}"))
             {
-                progress.Report((0, Logger.Log("Restoring executable...", LogFile)));
+                progress.Report((0, Logger.Log($"Restoring {exeName}...", LogFile)));
                 try
                 {
                     File.Copy($@"{gameDir}\unpackDS-backup\{exeName}", exePath, true);
