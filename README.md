@@ -20,7 +20,9 @@ If you're using this to patch a non-steam EXE, please get in contact with me so 
 **[thefifthmatt](https://github.com/thefifthmatt)** for suggesting how to make the unapacker faster.  
 
 ### Patch Notes  
-##V 1.3
+## v 1.4
+* Updated handling of EXE patch function so that it works like UDSFM with single EXE file.
+## V 1.3
 * updated the way situations are handled. Properly detects if game is unpacked but not patched, etc.
 ## V 1.2
 * Warns user if their Dark Souls folder is read only, which requires them to run as admin, instead of getting stuck at "Preparing to unpack"
