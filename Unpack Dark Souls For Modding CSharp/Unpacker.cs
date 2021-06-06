@@ -57,7 +57,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 
             var archivesExist = CheckArchives(gameDir, gameInfo);
 
-            if (!archivesExist)
+            if (!archivesExist || archivesExist && !unpacked)
             {
                 Restore(exePath, progress);
                 archivesExist = CheckArchives(gameDir, gameInfo);
