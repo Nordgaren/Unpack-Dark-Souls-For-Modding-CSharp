@@ -62,13 +62,9 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             if (!archivesExist || archivesExist && !unpacked)
             {
                 Restore(exePath, progress);
-                archivesExist = CheckArchives(gameDir, gameInfo);
-
-                if (!archivesExist)
-                {
-                    return Logger.Log($"No archives detected to unpack", LogFile);
-                }
             }
+
+            archivesExist = CheckArchives(gameDir, gameInfo);
 
             patched = CheckEXE(exePath);
 
@@ -78,6 +74,11 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                 if (error != null)
                 {
                     return Logger.Log(error, LogFile);
+                }
+
+                if (!archivesExist)
+                {
+                    return Logger.Log($"EXE Patched Successfully!", LogFile);
                 }
             }
 
