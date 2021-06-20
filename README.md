@@ -20,6 +20,8 @@ If you're using this to patch a non-steam EXE, please get in contact with me so 
 **[thefifthmatt](https://github.com/thefifthmatt)** for suggesting how to make the unapacker faster.  
 
 ### Patch Notes  
+## v 1.6
+* New Checksum key added.
 ## v 1.5
 * Detects and unpacks files if they aren't already known, to debug unpacking non steam versions.
 ## v 1.4
