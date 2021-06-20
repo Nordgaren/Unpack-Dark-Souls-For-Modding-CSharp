@@ -270,6 +270,24 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                                 currentFile++;
 
                                 string path;
+                                bool unknown;
+                                if (archiveDictionary.GetPath(header.FileNameHash, out path))
+                                {
+                                    unknown = false;
+                                    path = gameDir + path.Replace('/', '\\');
+                                    if (File.Exists(path))
+                                        continue;
+                                }
+                                else
+                                {
+                                    unknown = true;
+                                    string filename = $"{archive}_{header.FileNameHash:D10}";
+                                    string directory = $@"{gameDir}\_unknown";
+                                    path = $@"{directory}\{filename}";
+                                    if (File.Exists(path) || Directory.Exists(directory) && Directory.GetFiles(directory, $"{filename}.*").Length > 0)
+                                        continue;
+                                }
+
                                 if (archiveDictionary.GetPath(header.FileNameHash, out path))
                                 {
                                     path = gameDir + path.Replace('/', '\\');
@@ -300,9 +318,37 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                                 }
 
                                 byte[] bytes;
+
                                 try
                                 {
                                     bytes = header.ReadFile(bdtStream);
+                                    if (unknown)
+                                    {
+                                        BinaryReaderEx br = new BinaryReaderEx(false, bytes);
+                                        if (bytes.Length >= 3 && br.GetASCII(0, 3) == "GFX")
+                                            path += ".gfx";
+                                        else if (bytes.Length >= 4 && br.GetASCII(0, 4) == "FSB5")
+                                            path += ".fsb";
+                                        else if (bytes.Length >= 0x19 && br.GetASCII(0xC, 0xE) == "ITLIMITER_INFO")
+                                            path += ".itl";
+                                        else if (bytes.Length >= 0x10 && br.GetASCII(8, 8) == "FEV FMT ")
+                                            path += ".fev";
+                                        else if (bytes.Length >= 4 && br.GetASCII(1, 3) == "Lua")
+                                            path += ".lua";
+                                        else if (bytes.Length >= 4 && br.GetASCII(0, 4) == "DDS ")
+                                            path += ".dds";
+                                        else if (bytes.Length >= 4 && br.GetASCII(0, 4) == "#BOM")
+                                            path += ".txt";
+                                        else if (bytes.Length >= 4 && br.GetASCII(0, 4) == "BHF4")
+                                            path += ".bhd";
+                                        else if (bytes.Length >= 4 && br.GetASCII(0, 4) == "BDF4")
+                                            path += ".bdt";
+                                        else if (bytes.Length >= 4 && br.GetASCII(0, 4) == "ENFL")
+                                            path += ".entryfilelist";
+                                        else if (bytes.Length >= 4 && br.GetASCII(0, 4) == "DCX\0")
+                                            path += ".dcx";
+                                        br.Stream.Close();
+                                    }
 
                                     if (path.Contains(".dcx"))
                                     {

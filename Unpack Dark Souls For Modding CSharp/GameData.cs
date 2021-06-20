@@ -4,10 +4,13 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
 {
     class GameData
     {
+        //1f8f13874dabecee4caffec1b8fdb3d198fc1cc72d62440d38bfaa6a25c68be5 unpatched GFWL Checksum
+
         public static readonly Dictionary<string, string> Checksum = new Dictionary<string, string>
         {
             { "903a946273bfe123fe5c85740c3613374e2cf538564bb661db371c6cb5a421ff", "patched" },
-            { "473de70f0dd03048ca5dea545508f6776206424494334a9da091fb27c8e5a23f", "patched" },
+            { "473de70f0dd03048ca5dea545508f6776206424494334a9da091fb27c8e5a23f", "Debug patched" },
+            { "1096067527687b875e889b8fd78d2452d2984c56986e76566fb56157a8ce9c94", "Steamworks Beta (Prohet-patched) patched" },
             { "5ba004380a984a08acbe7e231a26ebe5aeafba68cf2803ee76d5b73e61cfd41b", "dvdbnd0.bdt" },
             { "c3d7827642e76564c4c13eccb0280e105896f88c0b3f68c58025cce051e9c98f", "dvdbnd1.bdt" },
             { "3d085778404185881a60c12dadaaca6041af643efbbf63f2da15a7ab6af45e0a", "dvdbnd2.bdt" },
