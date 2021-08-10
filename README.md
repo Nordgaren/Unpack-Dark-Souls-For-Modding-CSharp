@@ -11,7 +11,7 @@ It will unpack the Dark Souls PTDE folder selected by the user and copy over the
 
 I made this so that it could be used in my [PTDE Mod Installer](https://github.com/Nordgaren/PTDE-Mod-Installer)
 
-If you're using this to patch a non-steam EXE, please get in contact with me so I can add the checksum.  
+If you're using this to patch a non-steam EXE, please make sure to use version 1.7 and send me your UnpackLog.txt and version of the game me so I can add the checksum.  
 
 ### Thank You
 
@@ -20,6 +20,8 @@ If you're using this to patch a non-steam EXE, please get in contact with me so 
 **[thefifthmatt](https://github.com/thefifthmatt)** for suggesting how to make the unapacker faster.  
 
 ### Patch Notes  
+## v 1.7
+* Added some important info to text log (Before and after checksums and number of references patched).
 ## v 1.6
 * New Checksum key added.
 ## v 1.5
