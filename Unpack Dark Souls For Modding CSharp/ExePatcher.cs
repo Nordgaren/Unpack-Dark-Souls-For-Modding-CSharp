@@ -35,6 +35,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
                 }
             }
 
+            Logger.Log($"Unpatched EXE Checksum: {ChecksumUtil.GetChecksum(exePath)}", LogFile);
             byte[] bytes;
             try
             {
@@ -72,7 +73,7 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             {
                 return Logger.Log($"Failed to write file:\r\n{exePath}\r\n\r\n{ex}", LogFile);
             }
-
+            Logger.Log($"Patched EXE Checksum: {ChecksumUtil.GetChecksum(exePath)}", LogFile);
             progress.Report((1, Logger.Log("Patching complete!", LogFile)));
             return null;
         }
@@ -87,6 +88,8 @@ namespace Unpack_Dark_Souls_For_Modding_CSharp
             List<int> offsets = findBytes(bytes, targetBytes);
             foreach (int offset in offsets)
                 Array.Copy(replacementBytes, 0, bytes, offset, replacementBytes.Length);
+
+            Logger.Log($"Patched {offsets.Count} instances of {target}", LogFile);
         }
 
         private static List<int> findBytes(byte[] bytes, byte[] find)
