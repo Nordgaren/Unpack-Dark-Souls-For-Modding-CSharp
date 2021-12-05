@@ -6,7 +6,7 @@ This tool uses modified code from [UXM](https://github.com/JKAnderson/UXM) and [
 It will unpack the Dark Souls PTDE folder selected by the user and copy over the data files in the directory the EXE is run from.  
 
 ### Instructions
-1) Put EXE in Dark Souls PTDE folder
+1) Put EXE in Dark Souls PTDE folder and run it
 2) Watch text scroll until it says completed
 
 I made this so that it could be used in my [PTDE Mod Installer](https://github.com/Nordgaren/PTDE-Mod-Installer)
